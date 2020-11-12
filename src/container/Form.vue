@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '../utilitys/axios';
 import '../assets/css/bootstrap.css';
 export default {
   name: "Form",
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     submitForm() {
-      axios.get('http://localhost:57317/api/permission/get/all')
+      axios.get('/permission/get/all')
       .then(res=>{
           console.log(res.data);
       })
