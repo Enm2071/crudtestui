@@ -1,6 +1,5 @@
 <template>
-<div class="content">
-  <div class="test">
+  <div class="content">
     <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -33,11 +32,8 @@
     </tr>
   </tbody>
 </table>
-
 <PopUp v-if="showPopUp" @onHide="show"/>
-  </div>
- 
-<BackDrop v-if="showPopUp" />
+ <BackDrop v-if="showPopUp" />
   </div>
 </template>
 
@@ -64,7 +60,7 @@ export default {
 </script>
 
 <style scoped>
-.test{
+.content{
     display: flex;
     width: 80%;
     margin: auto;

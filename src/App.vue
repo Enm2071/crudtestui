@@ -5,14 +5,12 @@
   </div>
   <div id="app" class="content">
     <router-view></router-view>
-    <!-- <PermissionReport/> -->
   </div>
   </div>
 </template>
 
 <script>
 import NavBar from './components/NavBar';
-
 export default {
   name: 'App',
   components: {

@@ -36,7 +36,6 @@
 
 <script>
 import axios from '../utilitys/axios';
-import '../assets/css/bootstrap.css';
 export default {
   name: "Form",
   data() {
