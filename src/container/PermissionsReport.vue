@@ -6,24 +6,31 @@
           <th scope="col">Employee Name</th>
           <th scope="col">Employee Last Name</th>
           <th scope="col">Permission</th>
-          <th scope="col"></th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody is="transition-group" name="appear">
-          <tr v-bind:key="permission.id" v-for="permission in permissions">
-            <th scope="row">{{ permission.employeeName }}</th>
-            <td>{{ permission.employeeLastName }}</td>
-            <td>{{ permission.permissionType.description }}</td>
-            <td>
-              <button
-                type="button"
-                @click="show(permission.id)"
-                class="btn btn-danger"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
+        <tr v-bind:key="permission.id" v-for="permission in permissions">
+          <th scope="row">{{ permission.employeeName }}</th>
+          <td>{{ permission.employeeLastName }}</td>
+          <td>{{ permission.permissionType.description }}</td>
+          <td style="display:flex;justify-content:space-evenly">
+            <button
+              type="button"
+              @click="show(permission.id)"
+              class="btn btn-outline-danger"
+            >
+              Delete
+            </button>
+            <button
+              type="button"
+              @click="edit(permission.id)"
+              class="btn btn-outline-info"
+            >
+              Edit
+            </button>
+          </td>
+        </tr>
       </tbody>
     </table>
     <transition name="move">
@@ -78,6 +85,9 @@ export default {
           this.showPopUp = false;
         });
     },
+    edit(id){
+      this.$router.push('/edit-permission/'+id);
+    }
   },
   beforeMount() {
     axios
@@ -98,10 +108,9 @@ export default {
   width: 80%;
   margin: auto;
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
-    0 12.5px 10px rgba(0, 0, 0, 0.06),
-    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
-    0 41.8px 33.4px rgba(0, 0, 0, 0.086);
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086);
+  
 }
 
 .move-enter-active {
@@ -112,21 +121,21 @@ export default {
   animation: slide-out 0.3s ease-out forwards;
 }
 
-.appear-enter{
+.appear-enter {
   opacity: 0;
 }
 
-.appear-enter-active{
+.appear-enter-active {
   transition: opacity 1s;
 }
 
-.appear-leave-active{
+.appear-leave-active {
   transition: opacity 0.4s;
   opacity: 0;
   position: absolute;
 }
 
-.appear-move{
+.appear-move {
   transition: transform 1s;
 }
 
