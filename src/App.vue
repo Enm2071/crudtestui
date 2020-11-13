@@ -1,26 +1,28 @@
 <template>
-<div class="body">
-  <div class="header">
-    <NavBar/>
-  </div>
-  <div id="app" class="content">
-    <router-view></router-view>
-  </div>
+  <div class="body">
+    <div class="header">
+      <NavBar />
+    </div>
+    <div id="app" class="content">
+      <transition name="pg">
+        <router-view />
+      </transition>
+    </div>
   </div>
 </template>
 
 <script>
-import NavBar from './components/NavBar';
+import NavBar from "./components/NavBar";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    NavBar
-  }
-}
+    NavBar,
+  },
+};
 </script>
 
 <style>
-html{
+html {
   width: 100vw;
   height: 100vh;
 }
@@ -32,27 +34,52 @@ html{
   color: #2c3e50;
   margin-top: 60px;
 }
-body{
+body {
   margin: 0;
 }
 
-.body{
+.body {
   display: grid;
-  grid-template: 'header' 'content';
+  grid-template: "header" "content";
   width: 100%;
   height: 100%;
-  grid-template-rows: 4rem auto ;
+  grid-template-rows: 4rem auto;
 }
 
-.header{
+.header {
   grid-area: header;
   margin: 0;
   padding: 0;
 }
 
-.content{
+.content {
   grid-area: content;
 }
 
+.pg-enter-active {
+  animation: page-in 1s ease-out forwards;
+}
 
+.pg-leave {
+  animation: page-out 1s ease-out forwards;
+}
+
+
+@keyframes page-in {
+  from {
+    transform: translateX(-50px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes page-out {
+  from {
+    transform: translateX(0px);
+  }
+  to {
+    transform: translateX(-50px);
+  }
+}
 </style>
