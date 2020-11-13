@@ -24,7 +24,9 @@
           v-model.trim="EmployeeLastName"
           @blur="validate('EmployeeLastName')"
         />
-        <p v-if="!validation['EmployeeLastName'].valid">this field its required.</p>
+        <p v-if="!validation['EmployeeLastName'].valid">
+          this field its required.
+        </p>
       </div>
       <div class="form-group">
         <label>Permission Type</label>
@@ -40,7 +42,13 @@
       </div>
     </div>
     <div class="form_actions">
-      <button id="createPermissionBtn" type="button" @click="submitForm" class="btn btn-success" :disabled=!enableButton>
+      <button
+        id="createPermissionBtn"
+        type="button"
+        @click="submitForm"
+        class="btn btn-success"
+        :disabled="!enableButton"
+      >
         Create
       </button>
     </div>
@@ -64,22 +72,23 @@ export default {
     return {
       EmployeeName: "",
       EmployeeLastName: "",
-      permissionTypeSelected: 1,
+      permissionTypeSelected: null,
       showSpiner: false,
       permissionTypes: [],
       alertType: "",
       showAlert: false,
-      alertMsg:'',
-      validation:{
-        EmployeeName:{
+      alertMsg: "",
+      validation: {
+        EmployeeName: {
           valid: true,
-          rule: 'required'
-        },EmployeeLastName:{
+          rule: "required",
+        },
+        EmployeeLastName: {
           valid: true,
-          rule: 'required'
+          rule: "required",
         },
       },
-      enableButton:false
+      enableButton: false,
     };
   },
   components: {
@@ -90,7 +99,9 @@ export default {
   methods: {
     submitForm() {
       this.showSpiner = true;
-      const permissionType = this.permissionTypes.find(pt=>pt.id ===this.permissionTypeSelected );
+      const permissionType = this.permissionTypes.find(
+        (pt) => pt.id === this.permissionTypeSelected
+      );
       const data = JSON.stringify({
         EmployeeName: this.EmployeeName,
         PermissionType: permissionType,
@@ -103,14 +114,14 @@ export default {
           console.log(res.data);
           if (res.data.succeed) {
             this.alertType = "alert alert-success";
-            this.alertMsg = "Form Sended successfully"
+            this.alertMsg = "Form Sended successfully";
           } else {
             this.alertType = "alert alert-danger";
-            this.alertMsg = res.data.error.detail
+            this.alertMsg = res.data.error.detail;
           }
           this.showSpiner = false;
-          this.EmployeeLastName = '';
-          this.EmployeeName = ''
+          this.EmployeeLastName = "";
+          this.EmployeeName = "";
           this.permissionTypeSelected = 1;
         })
         .catch((err) => {
@@ -121,21 +132,23 @@ export default {
           console.log(err);
         });
     },
-    validate(input){
-        if(this.[input] === ''){
-          this.validation[input].valid = false;
-        }  else{
-          this.validation[input].valid = true;
-        }
+    validate(input) {
+      if (this[input] === "") {
+        this.validation[input].valid = false;
+      } else {
+        this.validation[input].valid = true;
+      }
 
-        this.enableButton = this.EmployeeName !== '' && this.EmployeeLastName !== '';
-    }
+      this.enableButton =
+        this.EmployeeName !== "" && this.EmployeeLastName !== "";
+    },
   },
   created() {
     axios
       .get("/permissionType/get/all")
       .then((res) => {
         this.permissionTypes = res.data.body;
+        this.permissionTypeSelected = res.data.body[0].id;
       })
       .catch((err) => {
         console.log(err);
@@ -152,11 +165,9 @@ export default {
   display: grid;
   grid-template: "header" "body" "actions";
   grid-template-rows: 3rem auto 5rem;
-  box-shadow:   0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
-    0 12.5px 10px rgba(0, 0, 0, 0.06),
-    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
-    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
     0 100px 80px rgba(0, 0, 0, 0.12);
   border-radius: 2px 4px;
 }
@@ -226,7 +237,7 @@ export default {
 #createPermissionBtn:not(:disabled) {
   animation: enable 0.3s linear;
 }
-#createPermissionBtn{
+#createPermissionBtn {
   font-size: 1.2rem;
 }
 
