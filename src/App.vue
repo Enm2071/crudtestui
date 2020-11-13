@@ -36,6 +36,10 @@ html {
 }
 body {
   margin: 0;
+  background-image: url('./assets/images/requestWallpeaper.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .body {

@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-dark bg-dark" >
-    <router-link class="navbar-brand hvr-sweep-to-top" to="/" active-class="active" exact>Permission</router-link>
-    <router-link class="navbar-brand hvr-sweep-to-top" to="/create-permission" active-class="active" exact>Request</router-link>
+    <router-link class="navbar-brand hvr-sweep-to-top" to="/" active-class="active" exact>Report</router-link>
+    <router-link class="navbar-brand hvr-sweep-to-top" to="/create-permission" active-class="active" exact>New Request</router-link>
   </nav>
 </template>
 

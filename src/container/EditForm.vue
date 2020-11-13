@@ -42,6 +42,14 @@
       </div>
     </div>
     <div class="form_actions">
+        <button
+        type="button"
+        @click="back"
+        class="btn btn-secondary"
+        :disabled="!enableButton"
+      >
+        Cancel
+      </button>
       <button
         id="createPermissionBtn"
         type="button"
@@ -140,6 +148,9 @@ export default {
       this.enableButton =
         this.EmployeeName !== "" && this.EmployeeLastName !== "";
     },
+    back(){
+        this.$router.push('/');
+    }
   },
   mounted() {
     axios
@@ -168,7 +179,7 @@ export default {
 <style scoped>
 .form {
   width: 30vw;
-  height: 57vh;
+  height: 65vh;
   margin: auto;
   background-color: white;
   display: grid;
@@ -208,6 +219,8 @@ export default {
 
 .form_actions {
   grid-area: actions;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .slide-enter-active {
@@ -260,5 +273,9 @@ export default {
   100% {
     transform: scale(1);
   }
+}
+
+button{
+    height: 50px;
 }
 </style>
